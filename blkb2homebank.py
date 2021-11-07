@@ -3,6 +3,7 @@
 import argparse
 import csv
 import os
+import io
 from datetime import datetime
 
 
@@ -11,7 +12,7 @@ class BlkbDialect(csv.Dialect):
     quotechar = '"'
     doublequote = False
     skipinitialspace = False
-    lineterminator = "\r\n"
+    lineterminator = "\n"
     quoting = csv.QUOTE_MINIMAL
 
 
@@ -46,7 +47,9 @@ homebank_fieldnames = [
 
 
 def convert_csv(in_filename, out_filename):
-    with open(in_filename, "r") as in_file, open(out_filename, "w") as out_file:
+    with io.open(in_filename, "r", newline="") as in_file, io.open(
+        out_filename, "w", newline=""
+    ) as out_file:
         lines = in_file.readlines()
         transaction_lines = lines[3:-1]
 

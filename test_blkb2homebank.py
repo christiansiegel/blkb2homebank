@@ -1,10 +1,14 @@
 import unittest
 import blkb2homebank
 import os
+import io
 
 
 class blkb2homebankTest(unittest.TestCase):
     out_filename = "test-output.csv"
+
+    def setup(self):
+        self.maxDiff = None
 
     def test_append_to_filename(self):
         actual = blkb2homebank.append_to_filename("foo/bar.csv", "-test")
@@ -16,9 +20,9 @@ class blkb2homebankTest(unittest.TestCase):
 
     def test_convert_csv(self):
         blkb2homebank.convert_csv("testdata/test-input.csv", self.out_filename)
-        with open(self.out_filename, "r") as actual_out_file:
+        with io.open(self.out_filename, "r", newline="") as actual_out_file:
             actual = actual_out_file.read()
-        with open("testdata/test-output.csv", "r") as expected_out_file:
+        with io.open("testdata/test-output.csv", "r", newline="") as expected_out_file:
             expected = expected_out_file.read()
         self.assertEqual(actual, expected)
 
