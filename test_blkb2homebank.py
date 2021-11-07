@@ -16,17 +16,11 @@ class blkb2homebankTest(unittest.TestCase):
 
     def test_convert_csv(self):
         blkb2homebank.convert_csv("testdata/test-input.csv", self.out_filename)
-        with open(self.out_filename) as out_file:
-            lines = out_file.readlines()
-            self.assertEqual(len(lines), 4)
-            self.assertEqual(
-                lines[0].rstrip("\r\n"),
-                "29-01-2021;8;;;Zahlungsauftrag E-Banking / Ref.-Nr.  1234567890;-600;;",
-            )
-            self.assertEqual(
-                lines[3].rstrip("\r\n"),
-                "23-01-2021;8;;;Zahlungseingang / Ref.-Nr.  1234567890;1300;;",
-            )
+        with open(self.out_filename, "r") as actual_out_file:
+            actual = actual_out_file.read()
+        with open("testdata/test-output.csv", "r") as expected_out_file:
+            expected = expected_out_file.read()
+        self.assertEqual(actual, expected)
 
     def _delete_if_exits(self, filename):
         if os.path.isfile(filename):
