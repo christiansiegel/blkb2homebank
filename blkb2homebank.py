@@ -52,6 +52,11 @@ def convert_csv(in_filename, out_filename):
         out_filename, "w", newline=""
     ) as out_file:
         lines = in_file.readlines()
+        headers = lines[0].strip().split(";")
+        for idx, expected_header in enumerate(blkb_fieldnames):
+            if headers[idx] != expected_header:
+                print(f"Missing CSV column {expected_header}")
+                exit(1)
         transaction_lines = lines[3:-1]
 
         reader = csv.DictReader(
