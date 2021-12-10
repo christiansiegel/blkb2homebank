@@ -49,7 +49,7 @@ homebank_fieldnames = [
 
 def convert_csv(in_filename, out_filename):
     with io.open(in_filename, "r", newline="", encoding="iso-8859-1") as in_file, io.open(
-        out_filename, "w", newline=""
+        out_filename, "w", newline="", encoding="utf-8"
     ) as out_file:
         lines = in_file.readlines()
         headers = lines[0].strip().split(";")
@@ -69,7 +69,7 @@ def convert_csv(in_filename, out_filename):
         for row in reader:
             date = convert_to_homebank_date(row["Valuta"], "%d.%m.%Y")
             paymode = 8  # = Electronic Payment
-            memo = row["Text"].strip().replace("\n", " ")
+            memo = row["Text"].strip().replace("\r\n", "\n").replace("\n", " ")
             if row["Gutschrift"]:
                 amount = row["Gutschrift"]
             else:
