@@ -28,6 +28,7 @@ class HomebankDialect(csv.Dialect):
 blkb_fieldnames = [
     "Buchungsdatum",
     "Text",
+    "Betrag Einzelzahlung",
     "Belastung",
     "Gutschrift",
     "Valuta",
@@ -47,7 +48,7 @@ homebank_fieldnames = [
 
 
 def convert_csv(in_filename, out_filename):
-    with io.open(in_filename, "r", newline="") as in_file, io.open(
+    with io.open(in_filename, "r", newline="", encoding="iso-8859-1") as in_file, io.open(
         out_filename, "w", newline=""
     ) as out_file:
         lines = in_file.readlines()
@@ -63,11 +64,12 @@ def convert_csv(in_filename, out_filename):
         for row in reader:
             date = convert_to_homebank_date(row["Valuta"], "%d.%m.%Y")
             paymode = 8  # = Electronic Payment
-            memo = row["Text"].strip()
+            memo = row["Text"].strip().replace("\n", " ")
             if row["Gutschrift"]:
                 amount = row["Gutschrift"]
             else:
                 amount = "-" + row["Belastung"]
+            amount = amount.replace("'", "")
             writer.writerow(
                 {"date": date, "paymode": paymode, "memo": memo, "amount": amount}
             )

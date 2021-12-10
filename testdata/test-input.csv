@@ -1,8 +1,9 @@
-ï»¿Buchungsdatum;Text;Belastung;Gutschrift;Valuta;Saldo
-Umsatztotal;;693.55;1'300.00;;
-Schlusssaldo;;;;;606.45
-29.01.2021;Zahlungsauftrag E-Banking / Ref.-Nr.  1234567890;600;;29.01.2021;606.45
-29.01.2021;Belastung: Dauerauftrag / Ref.-Nr.  1234567890;60;;29.01.2021;1'206.45
-28.01.2021;Viseca Zahlung  / Ref.-Nr.  1234567890;33.55;;28.01.2021;1'266.45
-26.01.2021;Zahlungseingang / Ref.-Nr.  1234567890;;1300;23.01.2021;1'300.00
-Anfangssaldo;;;;;0
+Buchungsdatum;Text;Betrag Einzelzahlung;Belastung;Gutschrift;Valuta;Saldo
+Umsatztotal;;;693.55;1'300.00;;
+Schlusssaldo;;;;;;606.45
+29.01.2021;"Zahlungsauftrag E-Banking / Ref.-Nr.  1234567890
+Firma ÄÖÜ";;6'000.12;;29.01.2021;606.45
+29.01.2021;Belastung: Dauerauftrag / Ref.-Nr.  1234567890;;60;;29.01.2021;1'206.45
+28.01.2021;Viseca Zahlung  / Ref.-Nr.  1234567890;;33.55;;28.01.2021;1'266.45
+26.01.2021;Zahlungseingang / Ref.-Nr.  1234567890;;;1300;23.01.2021;1'300.00
+Anfangssaldo;;;;;;0
