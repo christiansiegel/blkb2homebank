@@ -57,7 +57,9 @@ def convert_csv(in_filename, out_filename):
             if headers[idx] != expected_header:
                 print(f"Missing CSV column {expected_header}")
                 exit(1)
-        transaction_lines = lines[3:-1]
+        transaction_lines = lines[3:]
+        if transaction_lines[-1].startswith("Anfangssaldo"):
+          transaction_lines.pop()
 
         reader = csv.DictReader(
             transaction_lines, dialect=BlkbDialect, fieldnames=blkb_fieldnames

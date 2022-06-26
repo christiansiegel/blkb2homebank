@@ -26,6 +26,14 @@ class blkb2homebankTest(unittest.TestCase):
             expected = expected_out_file.read()
         self.assertEqual(actual, expected)
 
+    def test_convert_csv_without_anfangsaldo(self):
+        blkb2homebank.convert_csv("testdata/test-input-without-anfangssaldo.csv", self.out_filename)
+        with io.open(self.out_filename, "r", newline="") as actual_out_file:
+            actual = actual_out_file.read()
+        with io.open("testdata/test-output.csv", "r", newline="") as expected_out_file:
+            expected = expected_out_file.read()
+        self.assertEqual(actual, expected)
+
     def _delete_if_exits(self, filename):
         if os.path.isfile(filename):
             os.remove(filename)
